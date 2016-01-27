@@ -27,7 +27,7 @@ var args = getopts(location.search,
 {
   default:
   {
-    ws_uri: 'wss://219.251.4.177:30007/kurento',
+    ws_uri: 'wss://219.251.4.177:30008/kurento',
     ice_servers: undefined
   }
 });
