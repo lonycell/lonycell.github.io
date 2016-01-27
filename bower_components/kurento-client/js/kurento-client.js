@@ -1731,7 +1731,7 @@ register.modules = modules;
 var Backoff = require('./lib/backoff');
 var ExponentialBackoffStrategy = require('./lib/strategy/exponential');
 var FibonacciBackoffStrategy = require('./lib/strategy/fibonacci');
-var FunctionCall = require('lib/function_call.html');
+var FunctionCall = require('./lib/function_call.js');
 
 module.exports.Backoff = Backoff;
 module.exports.FunctionCall = FunctionCall;
@@ -2262,7 +2262,7 @@ BackoffStrategy.prototype.reset_ = function() {
 module.exports = BackoffStrategy;
 
 },{"events":21,"util":133}],14:[function(require,module,exports){
-var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%2b/index.html';
+var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
 	'use strict';
@@ -4223,7 +4223,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-}).call(this,{"isBuffer":require("../is-buffer/index.html")})
+}).call(this,{"isBuffer":require("../../is-buffer/index.js")})
 },{"../../is-buffer/index.js":24}],19:[function(require,module,exports){
 // This file should be ES5 compatible
 /* eslint prefer-spread:0, no-var:0, prefer-reflect:0, no-magic-numbers:0 */
@@ -17268,7 +17268,7 @@ exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
 },{"./decode":113,"./encode":114}],116:[function(require,module,exports){
-module.exports = require("lib/_stream_duplex.html")
+module.exports = require("./lib/_stream_duplex.js")
 
 },{"./lib/_stream_duplex.js":117}],117:[function(require,module,exports){
 (function (process){
@@ -17528,7 +17528,7 @@ function ReadableState(options, stream) {
   this.encoding = null;
   if (options.encoding) {
     if (!StringDecoder)
-      StringDecoder = require('string_decoder/index.html').StringDecoder;
+      StringDecoder = require('string_decoder/').StringDecoder;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
@@ -17629,7 +17629,7 @@ function needMoreData(state) {
 // backwards compatibility.
 Readable.prototype.setEncoding = function(enc) {
   if (!StringDecoder)
-    StringDecoder = require('string_decoder/index.html').StringDecoder;
+    StringDecoder = require('string_decoder/').StringDecoder;
   this._readableState.decoder = new StringDecoder(enc);
   this._readableState.encoding = enc;
 };
@@ -19000,23 +19000,23 @@ function endWritable(stream, state, cb) {
 
 }).call(this,require('_process'))
 },{"./_stream_duplex":117,"_process":111,"buffer":15,"core-util-is":18,"inherits":"inherits","stream":128}],122:[function(require,module,exports){
-module.exports = require("lib/_stream_passthrough.html")
+module.exports = require("./lib/_stream_passthrough.js")
 
 },{"./lib/_stream_passthrough.js":118}],123:[function(require,module,exports){
 var Stream = require('stream'); // hack to fix a circular dependency issue when used with browserify
-exports = module.exports = require('lib/_stream_readable.html');
+exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = Stream;
 exports.Readable = exports;
-exports.Writable = require('lib/_stream_writable.html');
-exports.Duplex = require('lib/_stream_duplex.html');
-exports.Transform = require('lib/_stream_transform.html');
-exports.PassThrough = require('lib/_stream_passthrough.html');
+exports.Writable = require('./lib/_stream_writable.js');
+exports.Duplex = require('./lib/_stream_duplex.js');
+exports.Transform = require('./lib/_stream_transform.js');
+exports.PassThrough = require('./lib/_stream_passthrough.js');
 
 },{"./lib/_stream_duplex.js":117,"./lib/_stream_passthrough.js":118,"./lib/_stream_readable.js":119,"./lib/_stream_transform.js":120,"./lib/_stream_writable.js":121,"stream":128}],124:[function(require,module,exports){
-module.exports = require("lib/_stream_transform.html")
+module.exports = require("./lib/_stream_transform.js")
 
 },{"./lib/_stream_transform.js":120}],125:[function(require,module,exports){
-module.exports = require("lib/_stream_writable.html")
+module.exports = require("./lib/_stream_writable.js")
 
 },{"./lib/_stream_writable.js":121}],126:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter
@@ -19193,11 +19193,11 @@ var EE = require('events').EventEmitter;
 var inherits = require('inherits');
 
 inherits(Stream, EE);
-Stream.Readable = require('readable-stream/readable.html');
-Stream.Writable = require('readable-stream/writable.html');
-Stream.Duplex = require('readable-stream/duplex.html');
-Stream.Transform = require('readable-stream/transform.html');
-Stream.PassThrough = require('readable-stream/passthrough.html');
+Stream.Readable = require('readable-stream/readable.js');
+Stream.Writable = require('readable-stream/writable.js');
+Stream.Duplex = require('readable-stream/duplex.js');
+Stream.Transform = require('readable-stream/transform.js');
+Stream.PassThrough = require('readable-stream/passthrough.js');
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -19695,7 +19695,7 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
     // Note that any invalid chars are also handled, but these
     // are the ones that are *expected* to be seen, so we fast-path
     // them.
-    nonHostChars = ['%', '../index.html', '?', ';', '#'].concat(autoEscape),
+    nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
     hostEndingChars = ['/', '?', '#'],
     hostnameMaxLen = 255,
     hostnamePartPattern = /^[a-z0-9A-Z_-]{0,63}$/,
@@ -19904,7 +19904,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     // the host field still retains them, though
     if (ipv6Hostname) {
       this.hostname = this.hostname.substr(1, this.hostname.length - 2);
-      if (rest[0] !== '../index.html') {
+      if (rest[0] !== '/') {
         rest = '/' + rest;
       }
     }
@@ -19951,7 +19951,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
   if (rest) this.pathname = rest;
   if (slashedProtocol[lowerProto] &&
       this.hostname && !this.pathname) {
-    this.pathname = '../index.html';
+    this.pathname = '/';
   }
 
   //to support http.request
@@ -20017,7 +20017,7 @@ Url.prototype.format = function() {
   if (this.slashes ||
       (!protocol || slashedProtocol[protocol]) && host !== false) {
     host = '//' + (host || '');
-    if (pathname && pathname.charAt(0) !== '../index.html') pathname = '/' + pathname;
+    if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
   } else if (!host) {
     host = '';
   }
@@ -20079,7 +20079,7 @@ Url.prototype.resolveObject = function(relative) {
     //urlParse appends trailing / to urls like http://www.example.com
     if (slashedProtocol[result.protocol] &&
         result.hostname && !result.pathname) {
-      result.path = result.pathname = '../index.html';
+      result.path = result.pathname = '/';
     }
 
     result.href = result.format();
@@ -20105,13 +20105,13 @@ Url.prototype.resolveObject = function(relative) {
 
     result.protocol = relative.protocol;
     if (!relative.host && !hostlessProtocol[relative.protocol]) {
-      var relPath = (relative.pathname || '').split('../index.html');
+      var relPath = (relative.pathname || '').split('/');
       while (relPath.length && !(relative.host = relPath.shift()));
       if (!relative.host) relative.host = '';
       if (!relative.hostname) relative.hostname = '';
       if (relPath[0] !== '') relPath.unshift('');
       if (relPath.length < 2) relPath.unshift('');
-      result.pathname = relPath.join('../index.html');
+      result.pathname = relPath.join('/');
     } else {
       result.pathname = relative.pathname;
     }
@@ -20132,16 +20132,16 @@ Url.prototype.resolveObject = function(relative) {
     return result;
   }
 
-  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '../index.html'),
+  var isSourceAbs = (result.pathname && result.pathname.charAt(0) === '/'),
       isRelAbs = (
           relative.host ||
-          relative.pathname && relative.pathname.charAt(0) === '../index.html'
+          relative.pathname && relative.pathname.charAt(0) === '/'
       ),
       mustEndAbs = (isRelAbs || isSourceAbs ||
                     (result.host && relative.pathname)),
       removeAllDots = mustEndAbs,
-      srcPath = result.pathname && result.pathname.split('../index.html') || [],
-      relPath = relative.pathname && relative.pathname.split('../index.html') || [],
+      srcPath = result.pathname && result.pathname.split('/') || [],
+      relPath = relative.pathname && relative.pathname.split('/') || [],
       psychotic = result.protocol && !slashedProtocol[result.protocol];
 
   // if the url is a non-slashed url, then relative
@@ -20260,16 +20260,16 @@ Url.prototype.resolveObject = function(relative) {
   }
 
   if (mustEndAbs && srcPath[0] !== '' &&
-      (!srcPath[0] || srcPath[0].charAt(0) !== '../index.html')) {
+      (!srcPath[0] || srcPath[0].charAt(0) !== '/')) {
     srcPath.unshift('');
   }
 
-  if (hasTrailingSlash && (srcPath.join('../index.html').substr(-1) !== '../index.html')) {
+  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
     srcPath.push('');
   }
 
   var isAbsolute = srcPath[0] === '' ||
-      (srcPath[0] && srcPath[0].charAt(0) === '../index.html');
+      (srcPath[0] && srcPath[0].charAt(0) === '/');
 
   // put the host back
   if (psychotic) {
@@ -20296,7 +20296,7 @@ Url.prototype.resolveObject = function(relative) {
     result.pathname = null;
     result.path = null;
   } else {
-    result.pathname = srcPath.join('../index.html');
+    result.pathname = srcPath.join('/');
   }
 
   //to support request.http

@@ -27,7 +27,7 @@ var args = getopts(location.search,
 {
   default:
   {
-    ws_uri: 'ws://' + 'iot.mdstec.com' + ':30008/kurento',
+    ws_uri: 'ws://219.251.4.177:30008/kurento',
     ice_servers: undefined
   }
 });
@@ -44,7 +44,6 @@ window.addEventListener('load', function(){
   console = new Console('console', console);
 	var videoOutput = document.getElementById('videoOutput');
 	var address = document.getElementById('address');
-	//address.value = 'http://files.kurento.org/video/puerta-del-sol.ts';
 	address.value = 'rtsp://192.168.10.156/avc';
   var pipeline;
   var webRtcPeer;
